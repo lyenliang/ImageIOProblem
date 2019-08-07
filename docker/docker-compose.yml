@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  tomcat:
+    container_name: tomcat
+    restart: always
+  #  image: tomcat:8-jdk8
+  #  image: tomcat:8.5.43-jdk13-openjdk-oracle
+  #  image: tomcat:8.5.43-jdk8-adoptopenjdk-hotspot 
+  #  image: tomcat:7.0.94-jre8 
+  #  image: andreptb/tomcat:latest
+    image: tomcat:7.0.96-jdk8-openjdk
+  #  image: tomcat:8.5.43-jdk13-openjdk-oracle
+    networks:
+      - internal-network
+    environment:
+      #- JAVA_OPTS="-Djava.awt.headless=true -server -Xms1024M -Xmx2048M -XX:PermSize=512M -XX:MaxPermSize=1024M -XX:+DisableExplicitGC -Duser.timezone=GMT+08"
+      - JAVA_OPTS="-Djava.awt.headless=true -server"
+    ports:
+      - 8080:8080
+    volumes:
+      - ./tomcat/volume/logs:/usr/local/tomcat/logs:Z
+      - ./tomcat/volume/webapps:/usr/local/tomcat/webapps:Z
+
+networks:
+  internal-network:

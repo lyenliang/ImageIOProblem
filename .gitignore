@@ -1,0 +1,3 @@
+bin
+build
+docker/tomcat/volume/logs/*
